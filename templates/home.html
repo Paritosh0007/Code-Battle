@@ -1,0 +1,176 @@
+{% extends 'base.html' %} {% load static %} {% block base_head %}
+<title>Code Warrior - Morphosis</title>
+{% endblock %} {% block content %} {% if error %}
+<div class="alert alert-danger alert-dismissible">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  {{ error }}
+</div>
+{% endif %}
+
+<div
+  class="jumbotron container"
+  style="padding-top: 10px;padding-left: 10px ;padding-bottom: 8px;margin-bottom:10px;margin-top:8px;padding-bottom: 10px "
+>
+  <div class="row">
+    <div class="col-sm-2 " style="padding-top: 22px">
+      <a href="{% url 'home'%}">
+        <img
+          src="https://image.ibb.co/cFLKpH/CODE_WARRIOR_N.png"
+          alt="CODE_WARRIOR_N"
+          border="0"
+          style="width: 170px;height: 60px"
+        />
+        <!-- <img src="https://image.ibb.co/eaahPH/hackerearth.png" alt="hackerearth" border="0" /> -->
+      </a>
+    </div>
+    <div id="head" class="col-sm-4 " style="padding-top: 28px">
+      <strong>
+        <h1 id="Code">Code Warrior</h1>
+      </strong>
+    </div>
+    <div class="col-sm-6 ">
+      <div id="clockdiv">
+        <div>
+          <span id="days" class="days"></span>
+          <div class="smalltext">Days</div>
+        </div>
+        <div>
+          <span id="hour" class="hours"></span>
+          <div class="smalltext">Hours</div>
+        </div>
+        <div>
+          <span id="minute" class="minutes"></span>
+          <div class="smalltext">Minutes</div>
+        </div>
+        <div>
+          <span id="second" class="seconds"></span>
+          <div class="smalltext">Seconds</div>
+        </div>
+      </div>
+      <script>
+        // Set the date we're counting down to
+        var countDownDate = new Date('May 9, 2019 9:59:59').getTime();
+
+        // Update the count 	<h1>Countdown Clock</h1>down every 1 second
+        var x = setInterval(function() {
+          // Get todays date and time
+          var now = new Date().getTime();
+
+          // Find the distance between now an the count down date
+          var distance = countDownDate - now;
+
+          // Time calculations for days, hours, minutes and seconds
+          var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          var hours = Math.floor(
+            (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+          );
+          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+          // Output the result in an element with id="demo"
+          document.getElementById('days').innerHTML = days;
+          document.getElementById('hour').innerHTML = hours;
+          document.getElementById('minute').innerHTML = minutes;
+          document.getElementById('second').innerHTML = seconds;
+
+          // If the count down is over, write some text
+          if (distance < 0) {
+            clearInterval(x);
+            document.getElementById('days').innerHTML = '0';
+            document.getElementById('hour').innerHTML = '0';
+            document.getElementById('minute').innerHTML = '0';
+            document.getElementById('second').innerHTML = '0';
+          }
+        }, 1000);
+      </script>
+    </div>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="row">
+    <div class="col-12">
+      <h3>General Information</h3>
+    </div>
+    <div class="col-12">
+      <ul>
+        <li style="text-align: left;">
+          The first stage will be an online elimination round. This stage will
+          be live for 5 days (5th May 2019 to 9th May 2019) and will have seven
+          questions.
+        </li>
+        <li style="text-align: left;">
+          The second stage will be an on-site round. This stage will be live for
+          3 hours and will have three questions.
+        </li>
+        <li style="text-align: left;">
+          <!--Two students from each year will be selected for the second stage based-->
+          <!--on their leaderboard rankings in the first stage.-->
+          Selection of the candidates for the second stage will be notified later.
+        </li>
+        <li style="text-align: left;">
+          Number of candidates selected for the second stage and the time and venue
+          for the same will be notified once the first stage ends.
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-12">
+      <h3>Platform Overview</h3>
+    </div>
+    <div class="col-12">
+      <ul>
+        <li style="text-align: left;">
+          In order to submit a solution, please write your code in your system
+          IDE/Editor, then upload your file.
+        </li>
+        <li style="text-align: left;">
+          Allowed languages are C, C++, Python 2 and Python 3 .
+        </li>
+        <li style="text-align: left;">
+          Your rank is being calculated based on your score and total time you
+          have taken to achieve the score.
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-12">
+      <h3>Code of Conduct</h3>
+    </div>
+    <div class="col-12">
+      <ul>
+        <li style="text-align: left;">
+          The candidate's submission code should not match with any other candidate's code. Plagarism is
+          strictly prohibited!
+        </li>
+        <li style="text-align: left;">
+          The candidate himself is participating in the contest and not someone
+          else on his behalf.
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-12">
+      <h4 style="text-align: left;">Disclaimer</h4>
+      <ul>
+        <li style="text-align: left;">
+          In case of any conflict, the final decision will be taken by the Code
+          Warrior Team. No further questions or challenges will be entertained.
+        </li>
+        <li style="text-align: left;">
+          The Code Warrior Team reserves the right to disqualify any candidate
+          who fails to comply with the Code of Conduct.
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<a href="{% url 'question:list' %}">
+  <button type="button" class="btn btn-success" style="margin-bottom: 20px">
+    Participate
+  </button>
+</a>
+{% endblock %}

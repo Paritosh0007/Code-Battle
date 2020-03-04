@@ -1,0 +1,61 @@
+{% url 'home' as home_url %}
+{% url 'login' as login_url %}
+{% url 'register' as register_url %}
+{% url 'logout' as logout_url %}
+{% url 'profile' request.user.username as profile_url %}
+{% url 'leaderboard' as leaderboard_url %}
+{% url 'contact' as contact_url %}
+
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #060608;">
+	<div class="container">
+		<!-- <img src="https://image.ibb.co/eOY4rx/Logo_NITMZ.png" alt="Logo_NITMZ" border="0" style="width:30px;height: 30px; padding-right: 5px;padding-left: 0px;padding-top: 0px"> -->
+		<a class="navbar-brand" href="{{ home_url }}">
+			{% if brand_name %} {{ brand_name}} {% else %} Code Warrior {% endif %}
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<!-- # ask shatanu for this -->
+				<li class="nav-item {% if request.path == home_url %}active{% endif %}">
+					<a class="nav-link" href="{% url 'question:list' %}">Problems <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item {% if request.path == leaderboard_url %}active{% endif %}">
+						<a class="nav-link" href="{{ leaderboard_url }}">Leaderboard</a>
+					</li>
+				<li class="nav-item {% if request.path == contact_url %}active{% endif %}">
+					<a class="nav-link" href="{{ contact_url }}">Contact</a>
+				</li>
+				
+			</ul>
+			<ul class="navbar-nav ml-auto">
+				{% if request.user.is_authenticated %}
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Account
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item {% if request.path == profile_url %}active{% endif %}" href="{{ profile_url }}">Profile</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item {% if request.path == logout_url %}active{% endif %}" href="{{ logout_url }}">Logout</a>
+						</div>
+					</li>
+					{% if request.user.is_admin %}
+						<li class="nav-item">
+							<a class="nav-link" href="/admin/" target="blank">Admin</a>
+						</li>
+					{% endif %}
+				{% else %}
+					<li class="nav-item {% if request.path == login_url %}active{% endif %}">
+						<a class="nav-link" href="{{ login_url }}">Login</a>
+					</li>
+					<li class="nav-item {% if request.path == register_url %}active{% endif %}">
+							<a class="nav-link" href="{{ register_url }}">Register</a>
+						</li>
+				{% endif %}
+			</ul>
+		</div>
+	</div>
+</nav>
